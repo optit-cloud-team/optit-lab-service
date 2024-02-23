@@ -36,8 +36,8 @@ spec:
         livenessProbe:
           tcpSocket:
             port: 8080
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
+          initialDelaySeconds: 120
+          timeoutSeconds: 300
           successThreshold: 1
           failureThreshold: 3
           periodSeconds: 10
@@ -45,8 +45,8 @@ spec:
           httpGet:
             path: /_status/healthz
             port: 8080
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
+          initialDelaySeconds: 120
+          timeoutSeconds: 30
           successThreshold: 1
           failureThreshold: 3
           periodSeconds: 10
