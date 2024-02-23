@@ -6,7 +6,7 @@ pipeline {
                 script { 
                     git branch: 'main', 
                         credentialsId: 'git-PAT', // Provide your credentials ID
-                        url: 'https://github.com/sanky-003/optit-lab-service.git' // Provide your Git repository URL
+                        url: 'https://github.com/optit-cloud-team/optit-lab-service.git' // Provide your Git repository URL
                 } 
             } 
         }
