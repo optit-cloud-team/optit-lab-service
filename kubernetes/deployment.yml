@@ -28,9 +28,26 @@ spec:
             cpu: 100m
             memory: 100Mi
           limits:
-            cpu: 100m
-            memory: 100Mi
+            cpu: 500m
+            memory: 256Mi
         ports:
         - containerPort:  8080
           name:  http
+        livenessProbe:
+          tcpSocket:
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /_status/healthz
+            port: 8080
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+          successThreshold: 1
+          failureThreshold: 3
+          periodSeconds: 10
       restartPolicy: Always
