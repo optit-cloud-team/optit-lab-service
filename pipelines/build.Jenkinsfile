@@ -39,9 +39,9 @@ pipeline {
                         sh "docker tag optit-lab-service $imageNameWithTag"
                         sh "docker push $imageNameWithTag"
 
-                        def imageNameWithTag = "bharathoptdocker/optit-lab-service:latest"
-                        sh "docker tag optit-lab-service $imageNameWithTag"
-                        sh "docker push $imageNameWithTag"
+                        def imageNameWithLatest = "bharathoptdocker/optit-lab-service:latest"
+                        sh "docker tag optit-lab-service $imageNameWithLatest"
+                        sh "docker push $imageNameWithLatest"
                     }
                 }
             }
