@@ -4,10 +4,10 @@ pipeline {
         stage('Git Checkout') { 
             steps { 
                 script { 
-                    git branch: 'main', 
+                    git branch: branch_or_tag, 
                         credentialsId: 'git-PAT', // Provide your credentials ID
                         url: 'https://github.com/optit-cloud-team/optit-lab-service.git' // Provide your Git repository URL
-                } 
+                }
             } 
         }
         stage('Build with Gradle') {

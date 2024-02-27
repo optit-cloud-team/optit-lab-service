@@ -4,18 +4,18 @@ pipeline {
         stage('Git Checkout') { 
             steps { 
                 script { 
-                    git branch: 'main', 
+                    git branch: branch_or_tag, 
                         credentialsId: 'git-PAT', // Provide your credentials ID
                         url: 'https://github.com/optit-cloud-team/optit-lab-service.git' // Provide your Git repository URL
-                } 
+                }
             } 
         }
         stage('Deploy to Kubernetes') {
             steps {
                 script {
                     // Assuming your all Kubernetes manifest files YAML is in the kubernetes directory of your repository
-                    sh 'kubectl apply -f kubernetes/service.yml'
-                    sh 'kubectl apply -f kubernetes/deployment.yml'
+                    sh 'kubectl apply -f kubernetes/manifest/deployment.yaml'
+                    sh 'kubectl apply -f kubernetes/manifest/service.yaml'
                 }
             }
         }
