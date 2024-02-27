@@ -13,9 +13,11 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // Assuming your all Kubernetes manifest files YAML is in the kubernetes directory of your repository
-                    sh 'kubectl apply -f kubernetes/manifest/deployment.yaml'
-                    sh 'kubectl apply -f kubernetes/manifest/service.yaml'
+                    withCredentials([file(credentialsId: 'poc-kube-cluster-cred', variable: 'KUBECONFIG')]) {
+                        sh 'mkdir -p $HOME/.kube/ && cat $KUBECONFIG > $HOME/.kube/config'
+                        sh 'kubectl apply -f kubernetes/manifest/deployment.yaml'
+                        sh 'kubectl apply -f kubernetes/manifest/service.yaml'
+                    }
                 }
             }
         }
