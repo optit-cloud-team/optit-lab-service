@@ -13,7 +13,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    // Assuming your all Kubernetes manifest files YAML is in the kubernetes directory of your repository
+                    echo $PWD // Assuming your all Kubernetes manifest files YAML is in the kubernetes directory of your repository
                     sh 'kubectl apply -f kubernetes/service.yml'
                     sh 'kubectl apply -f kubernetes/deployment.yml'
                 }
