@@ -6,7 +6,7 @@ metadata:
   labels:
     app: optit-lab-service
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: optit-lab-service
