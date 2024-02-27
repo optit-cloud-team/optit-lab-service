@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.7.18'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 	id 'java'
+	id 'org.sonarqube' version '4.4.1.3373'
 }
 
 group = 'in.optit'
@@ -21,4 +22,11 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+sonar {
+  properties {
+    property "sonar.projectKey", "optit-lab-service"
+    property "sonar.projectName", "optit-lab-service"
+  }
 }
