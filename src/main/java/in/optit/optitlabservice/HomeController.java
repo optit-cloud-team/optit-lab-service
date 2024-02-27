@@ -11,4 +11,9 @@ public class HomeController {
 		return "Welcome to the Opt IT Lab Sample Application!";
 	}
 
+	@GetMapping("/_status/healthz")
+	public String getHealth() {
+		return "OK";
+	}
+
 }
