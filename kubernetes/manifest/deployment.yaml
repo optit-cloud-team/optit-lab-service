@@ -19,5 +19,5 @@ spec:
       - name: optit-lab-service
         image: bharathoptdocker/optit-lab-service:latest
         ports:
-        - containerPort: 8085
+        - containerPort: 8080
           name: http
