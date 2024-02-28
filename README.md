@@ -2,6 +2,9 @@
 
 This application is a simple sample service for deploying in Opt IT Lab K8s cluster.
 
+## Build and Deployment Flow
+![image](https://github.com/optit-cloud-team/optit-lab-service/assets/15092596/0e14ad24-010d-4595-b3ce-6d16716eb670)
+
 ## Useful Commands
 
 | Gradle Command	         | Description                                   |
