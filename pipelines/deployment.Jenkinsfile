@@ -13,7 +13,7 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 script {
-                    withCredentials([file(credentialsId: 'poc-kube-cluster-cred', variable: 'KUBECONFIG')]) {
+                    withCredentials([file(credentialsId: 'poc-kube-cluster-cred-1', variable: 'KUBECONFIG')]) {
                         sh 'mkdir -p $HOME/.kube/ && cat $KUBECONFIG > $HOME/.kube/config'
                         sh 'kubectl apply -f kubernetes/manifest/deployment.yaml'
                         sh 'kubectl apply -f kubernetes/manifest/service.yaml'
