@@ -1,6 +1,16 @@
+@Library('optit-lab-jenkins-shared-libraries') _  // Load the shared library
+
 pipeline { 
     agent any 
     stages { 
+        stage('startedOptitlab') {
+            steps {
+                script {
+                    greetings()
+                }
+            }
+        }
+
         stage('Git Checkout') { 
             steps { 
                 script { 
