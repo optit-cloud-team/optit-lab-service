@@ -10,16 +10,14 @@ pipeline {
                 }
             }
         }
-
-        stage('Git Checkout') { 
-            steps { 
-                script { 
-                 
-                   checkoutGit(branch: 'main', credentialsId: 'git-PAT', url: 'https://github.com/optit-cloud-team/optit-lab-service.git')
-                }
-            } 
-        }
-
+        stage('Git Checkout') {
+  steps {
+    script {
+      checkoutGit(branch: 'main', credentialsId: 'git-PAT', url: 'https://github.com/optit-cloud-team/optit-lab-service.git')
+    }
+  }
+}
+       
         // Analyze the project with SonarQube
         stage('SonarQube Analysis') {
             steps {
