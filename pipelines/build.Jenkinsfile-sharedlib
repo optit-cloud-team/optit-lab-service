@@ -34,7 +34,8 @@ pipeline {
             steps {
                 script {
                     // Assuming your Gradle wrapper is in the root directory of your repository
-                    sh './gradlew build' // Command to execute Gradle build
+                    //sh './gradlew build' // Command to execute Gradle build
+                    gradleBuild()
                 }
             }
         }
