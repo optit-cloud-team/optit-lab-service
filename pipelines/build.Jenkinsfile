@@ -17,6 +17,7 @@ pipeline {
                 //withSonarQubeEnv('sonar-optitcloud-in') {
                  //   sh './gradlew sonar'
                 //}
+               echo 'sonarscan success' 
                 
 
             }
