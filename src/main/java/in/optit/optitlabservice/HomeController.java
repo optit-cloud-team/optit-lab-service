@@ -13,6 +13,12 @@ public class HomeController {
 	@GetMapping("/")
 	public String getGreeting() {
 		log.info("Greetings from Opt IT Lab Sample Application");
+		// log.error("Error level log");
+    		// log.warn("Warn level log");
+    		// log.info("Info level log");
+    		// log.debug("Debug level log");
+    		// log.trace("Trace level log");
+		
 		return "Welcome to the Opt IT Lab Sample Application!";
 	}
 
