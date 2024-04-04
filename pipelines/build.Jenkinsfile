@@ -14,10 +14,11 @@ pipeline {
         // Analyze the project with SonarQube
         stage('SonarQube Analysis') {
             steps {
-                // withSonarQubeEnv('sonar-optitcloud-in') {
+                //withSonarQubeEnv('sonar-optitcloud-in') {
                  //   sh './gradlew sonar'
-                      sh 'echo "sonarqube"'
-                }
+                //}
+                sh 'sonar qube' 
+
             }
         }
 
