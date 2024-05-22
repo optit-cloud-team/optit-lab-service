@@ -12,32 +12,32 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 script {
-                    load 'pipeline-scripts/gitCheckout.groovy'
-                    gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
+                    def gitCheckout = load 'pipeline-scripts/gitCheckout.groovy'
+                    gitCheckout.call(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
                 }
             }
         }
         stage('Build with Gradle') {
             steps {
                 script {
-                    load 'pipeline-scripts/buildWithGradle.groovy'
-                    buildWithGradle()
+                    def buildWithGradle = load 'pipeline-scripts/buildWithGradle.groovy'
+                    buildWithGradle.call()
                 }
             }
         }
         stage('Docker Build') {
             steps {
                 script {
-                    load 'pipeline-scripts/dockerBuild.groovy'
-                    dockerBuild(params.DOCKER_IMAGE_NAME)
+                    def dockerBuild = load 'pipeline-scripts/dockerBuild.groovy'
+                    dockerBuild.call(params.DOCKER_IMAGE_NAME)
                 }
             }
         }
         stage('Docker Publish') {
             steps {
                 script {
-                    load 'pipeline-scripts/dockerPublish.groovy'
-                    dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
+                    def dockerPublish = load 'pipeline-scripts/dockerPublish.groovy'
+                    dockerPublish.call(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
                 }
             }
         }
