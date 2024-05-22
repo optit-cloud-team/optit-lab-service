@@ -1,14 +1,12 @@
 // dsl_script.groovy
-def getContent() {
-    // Put your DSL script content here
-    return """
+
     def gitCheckout(String branch, String gitUrl, String credentialsId) {
         git branch: branch,
             credentialsId: credentialsId,
             url: gitUrl
     }
 
-    def buildWithGradle() {
+def buildWithGradle() {
         sh './gradlew build' // Command to execute Gradle build
     }
 
@@ -25,5 +23,3 @@ def getContent() {
             sh "docker push \${imageNameWithTag}"
         }
     }
-    """
-}
