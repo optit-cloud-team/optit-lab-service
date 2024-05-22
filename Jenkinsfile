@@ -12,28 +12,28 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 script {
-                    gitUtils.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
+                    gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
                 }
             }
         }
         stage('Build with Gradle') {
             steps {
                 script {
-                    buildUtils.buildWithGradle()
+                    buildWithGradle()
                 }
             }
         }
         stage('Docker Build') {
             steps {
                 script {
-                    dockerUtils.dockerBuild(params.DOCKER_IMAGE_NAME)
+                    dockerBuild(params.DOCKER_IMAGE_NAME)
                 }
             }
         }
         stage('Docker Publish') {
             steps {
                 script {
-                    dockerUtils.dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
+                    dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
                 }
             }
         }
