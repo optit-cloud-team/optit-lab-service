@@ -12,6 +12,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 script {
+                    load 'dsl_script.groovy'  // Import the DSL script
                     gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
                 }
             }
@@ -19,6 +20,7 @@ pipeline {
         stage('Build with Gradle') {
             steps {
                 script {
+                    load 'dsl_script.groovy'  // Import the DSL script
                     buildWithGradle()
                 }
             }
@@ -26,6 +28,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
+                    load 'dsl_script.groovy'  // Import the DSL script
                     dockerBuild(params.DOCKER_IMAGE_NAME)
                 }
             }
@@ -33,6 +36,7 @@ pipeline {
         stage('Docker Publish') {
             steps {
                 script {
+                    load 'dsl_script.groovy'  // Import the DSL script
                     dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
                 }
             }
