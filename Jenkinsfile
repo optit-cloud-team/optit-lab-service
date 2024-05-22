@@ -1,45 +1,39 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build from')
+        string(name: 'GIT_URL', defaultValue: 'https://github.com/optit-cloud-team/optit-lab-service.git', description: 'Git repository URL')
+        string(name: 'DOCKER_IMAGE_NAME', defaultValue: 'optit-lab-service', description: 'Docker image name')
+        string(name: 'DOCKER_REPO', defaultValue: 'bharathoptdocker', description: 'Docker repository')
+    }
+
     stages {
         stage('Git Checkout') {
             steps {
-                checkout([$class: 'GitSCM',
-                          branches: [[name: '*/main']],
-                          doGenerateSubmoduleConfigurations: false,
-                          extensions: [],
-                          gitTool: 'Default',
-                          submoduleCfg: [],
-                          userRemoteConfigs: [[url: 'https://github.com/optit-cloud-team/optit-lab-service.git']]])
+                script {
+                    gitUtils.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
+                }
             }
         }
-
         stage('Build with Gradle') {
             steps {
                 script {
-                    // Your build with Gradle steps here
-                    // Example:
-                    sh 'gradle build'
+                    buildUtils.buildWithGradle()
                 }
             }
         }
-
         stage('Docker Build') {
             steps {
                 script {
-                    // Your Docker build steps here
-                    // Example:
-                    sh 'docker build -t my-image .'
+                    dockerUtils.dockerBuild(params.DOCKER_IMAGE_NAME)
                 }
             }
         }
-
         stage('Docker Publish') {
             steps {
                 script {
-                    // Your Docker publish steps here
-                    // Example:
-                    sh 'docker push my-image'
+                    dockerUtils.dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
                 }
             }
         }
