@@ -14,8 +14,8 @@ pipeline {
                 script {
                     // Load the pipeline script
                     def pipelineScript = load 'pipelines/Java_Gradle_pipeline.groovy'
-                    // Call the executePipeline method from the loaded script
-                    pipelineScript.executePipeline(params)
+                    // Call the method defined in the loaded script
+                    pipelineScript.call(params)
                 }
             }
         }
