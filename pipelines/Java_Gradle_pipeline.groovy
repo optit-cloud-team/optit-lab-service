@@ -58,3 +58,5 @@ def dockerPublish(String imageName, String dockerRepo, String credentialsId) {
         sh "docker push ${imageNameWithTag}"
     }
 }
+
+return this
