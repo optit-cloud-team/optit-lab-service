@@ -12,7 +12,7 @@ pipeline {
         stage('Load Pipeline Script') {
             steps {
                 script {
-                    def pipelineScript = load 'pipeline/pipeline.groovy'
+                    def pipelineScript = load 'pipeline/Java_Gradle_pipeline.groovy'
                     pipelineScript.executePipeline(params)
                 }
             }
