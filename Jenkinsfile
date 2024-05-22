@@ -1,15 +1,13 @@
 pipeline {
     agent any
 
-    parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build from')
-        string(name: 'GIT_URL', defaultValue: 'https://github.com/optit-cloud-team/optit-lab-service.git', description: 'Git repository URL')
-        string(name: 'DOCKER_IMAGE_NAME', defaultValue: 'optit-lab-service', description: 'Docker image name')
-        string(name: 'DOCKER_REPO', defaultValue: 'bharathoptdocker', description: 'Docker repository')
+    // Load DSL script
+    options {
+        skipDefaultCheckout(true) // Skip default checkout since we're using custom DSL
     }
 
     stages {
-        stage('Git Checkout') {
+        stage('Checkout') {
             steps {
                 script {
                     gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
@@ -39,3 +37,9 @@ pipeline {
         }
     }
 }
+
+// Include DSL script
+def gitCheckout = load('dsl_script.groovy')
+def buildWithGradle = load('dsl_script.groovy')
+def dockerBuild = load('dsl_script.groovy')
+def dockerPublish = load('dsl_script.groovy')
