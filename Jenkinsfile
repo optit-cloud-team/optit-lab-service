@@ -18,6 +18,8 @@ pipeline {
             steps {
                 script {
                     // Your build with Gradle steps here
+                    // Example:
+                    sh 'gradle build'
                 }
             }
         }
@@ -26,6 +28,8 @@ pipeline {
             steps {
                 script {
                     // Your Docker build steps here
+                    // Example:
+                    sh 'docker build -t my-image .'
                 }
             }
         }
@@ -34,6 +38,8 @@ pipeline {
             steps {
                 script {
                     // Your Docker publish steps here
+                    // Example:
+                    sh 'docker push my-image'
                 }
             }
         }
