@@ -1,4 +1,4 @@
-def executePipeline(params) {
+def call(params) {
     pipeline {
         agent any
 
