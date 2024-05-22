@@ -36,9 +36,13 @@ def executePipeline(params) {
 }
 
 def gitCheckout(String branch, String gitUrl, String credentialsId) {
-    git branch: branch,
-        credentialsId: credentialsId,
-        url: gitUrl
+    checkout([$class: 'GitSCM',
+              branches: [[name: branch]],
+              doGenerateSubmoduleConfigurations: false,
+              extensions: [],
+              submoduleCfg: [],
+              userRemoteConfigs: [[url: gitUrl, credentialsId: credentialsId]]
+    ])
 }
 
 def buildWithGradle() {
