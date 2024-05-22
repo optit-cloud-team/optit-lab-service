@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     def gitCheckout = load 'pipeline-scripts/gitCheckout.groovy'
-                    gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
+                    gitCheckout.call(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
             steps {
                 script {
                     def buildWithGradle = load 'pipeline-scripts/buildWithGradle.groovy'
-                    buildWithGradle()
+                    buildWithGradle.call()
                 }
             }
         }
@@ -29,7 +29,7 @@ pipeline {
             steps {
                 script {
                     def dockerBuild = load 'pipeline-scripts/dockerBuild.groovy'
-                    dockerBuild(params.DOCKER_IMAGE_NAME)
+                    dockerBuild.call(params.DOCKER_IMAGE_NAME)
                 }
             }
         }
@@ -37,7 +37,7 @@ pipeline {
             steps {
                 script {
                     def dockerPublish = load 'pipeline-scripts/dockerPublish.groovy'
-                    dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
+                    dockerPublish.call(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
                 }
             }
         }
