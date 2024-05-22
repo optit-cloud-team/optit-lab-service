@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build from')
+        string(name: 'GIT_URL', defaultValue: 'https://github.com/optit-cloud-team/optit-lab-service.git', description: 'Git repository URL')
+        string(name: 'DOCKER_IMAGE_NAME', defaultValue: 'optit-lab-service', description: 'Docker image name')
+        string(name: 'DOCKER_REPO', defaultValue: 'bharathoptdocker', description: 'Docker repository')
+    }
+
+    stages {
+        stage('Load Pipeline Script') {
+            steps {
+                script {
+                    def pipelineScript = load 'pipeline/pipeline.groovy'
+                    pipelineScript.executePipeline(params)
+                }
+            }
+        }
+    }
+}
