@@ -6,10 +6,9 @@ pipeline {
             steps {
                 script {
                     // Load DSL script
-                    def dslScript = load('dsl_script.groovy')
-                    
-                    // Print content of DSL script for debugging
-                    echo dslScript
+                   def dslScriptContent = load('dsl_script.groovy').getContent()
+echo dslScriptContent
+
                 }
             }
         }
