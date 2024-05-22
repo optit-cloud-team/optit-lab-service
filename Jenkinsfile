@@ -17,29 +17,5 @@ pipeline {
                 }
             }
         }
-        stage('Build with Gradle') {
-            steps {
-                script {
-                    load 'dsl_script.groovy'  // Import the DSL script
-                    buildWithGradle()
-                }
-            }
-        }
-        stage('Docker Build') {
-            steps {
-                script {
-                    load 'dsl_script.groovy'  // Import the DSL script
-                    dockerBuild(params.DOCKER_IMAGE_NAME)
-                }
-            }
-        }
-        stage('Docker Publish') {
-            steps {
-                script {
-                    load 'dsl_script.groovy'  // Import the DSL script
-                    dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
-                }
-            }
-        }
     }
-}
+        
