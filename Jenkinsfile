@@ -12,11 +12,16 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 script {
-                    def dsl = load 'dsl_script.groovy'
+                    def dsl = null
+                    try {
+                        dsl = load 'dsl_script.groovy'
+                        echo "dsl_script.groovy loaded successfully."
+                    } catch (Exception e) {
+                        error "Failed to load dsl_script.groovy: ${e.message}"
+                    }
+
                     if (dsl != null) {
                         dsl.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'bkgit')
-                    } else {
-                        error "Failed to load dsl_script.groovy"
                     }
                 }
             }
@@ -24,11 +29,16 @@ pipeline {
         stage('Build with Gradle') {
             steps {
                 script {
-                    def dsl = load 'dsl_script.groovy'
+                    def dsl = null
+                    try {
+                        dsl = load 'dsl_script.groovy'
+                        echo "dsl_script.groovy loaded successfully."
+                    } catch (Exception e) {
+                        error "Failed to load dsl_script.groovy: ${e.message}"
+                    }
+
                     if (dsl != null) {
                         dsl.buildWithGradle()
-                    } else {
-                        error "Failed to load dsl_script.groovy"
                     }
                 }
             }
@@ -36,11 +46,16 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    def dsl = load 'dsl_script.groovy'
+                    def dsl = null
+                    try {
+                        dsl = load 'dsl_script.groovy'
+                        echo "dsl_script.groovy loaded successfully."
+                    } catch (Exception e) {
+                        error "Failed to load dsl_script.groovy: ${e.message}"
+                    }
+
                     if (dsl != null) {
                         dsl.dockerBuild(params.DOCKER_IMAGE_NAME)
-                    } else {
-                        error "Failed to load dsl_script.groovy"
                     }
                 }
             }
@@ -48,11 +63,16 @@ pipeline {
         stage('Docker Publish') {
             steps {
                 script {
-                    def dsl = load 'dsl_script.groovy'
+                    def dsl = null
+                    try {
+                        dsl = load 'dsl_script.groovy'
+                        echo "dsl_script.groovy loaded successfully."
+                    } catch (Exception e) {
+                        error "Failed to load dsl_script.groovy: ${e.message}"
+                    }
+
                     if (dsl != null) {
                         dsl.dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
-                    } else {
-                        error "Failed to load dsl_script.groovy"
                     }
                 }
             }
