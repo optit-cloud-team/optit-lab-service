@@ -13,7 +13,11 @@ pipeline {
             steps {
                 script {
                     def dsl = load 'dsl_script.groovy'
-                    dsl.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'bkgit')
+                    if (dsl != null) {
+                        dsl.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'bkgit')
+                    } else {
+                        error "Failed to load dsl_script.groovy"
+                    }
                 }
             }
         }
@@ -21,7 +25,11 @@ pipeline {
             steps {
                 script {
                     def dsl = load 'dsl_script.groovy'
-                    dsl.buildWithGradle()
+                    if (dsl != null) {
+                        dsl.buildWithGradle()
+                    } else {
+                        error "Failed to load dsl_script.groovy"
+                    }
                 }
             }
         }
@@ -29,7 +37,11 @@ pipeline {
             steps {
                 script {
                     def dsl = load 'dsl_script.groovy'
-                    dsl.dockerBuild(params.DOCKER_IMAGE_NAME)
+                    if (dsl != null) {
+                        dsl.dockerBuild(params.DOCKER_IMAGE_NAME)
+                    } else {
+                        error "Failed to load dsl_script.groovy"
+                    }
                 }
             }
         }
@@ -37,7 +49,11 @@ pipeline {
             steps {
                 script {
                     def dsl = load 'dsl_script.groovy'
-                    dsl.dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
+                    if (dsl != null) {
+                        dsl.dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
+                    } else {
+                        error "Failed to load dsl_script.groovy"
+                    }
                 }
             }
         }
