@@ -1,3 +1,7 @@
-def call() {
-    sh './gradlew build' // Command to execute Gradle build
+def buildWithGradle() {
+    withEnv(["GRADLE_OPTS=-Dorg.gradle.daemon=false"]) {
+        sh './gradlew clean build'
+    }
 }
+
+return this
