@@ -1,3 +1,5 @@
-def call(String imageName) {
-    docker.build(imageName, ".") // Using parameter for Docker image name
+def dockerBuild(String imageName) {
+    sh "docker build -t ${imageName} ."
 }
+
+return this
