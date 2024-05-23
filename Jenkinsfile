@@ -13,7 +13,7 @@ pipeline {
             steps {
                 script {
                     def dsl = load 'dsl_script.groovy'
-                    dsl.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
+                    dsl.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'bkgit')
                 }
             }
         }
