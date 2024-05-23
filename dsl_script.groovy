@@ -1,45 +1,27 @@
-pipeline {
-    agent any
+// dsl_script.groovy
 
-    parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build from')
-        string(name: 'GIT_URL', defaultValue: 'https://github.com/optit-cloud-team/optit-lab-service.git', description: 'Git repository URL')
-        string(name: 'DOCKER_IMAGE_NAME', defaultValue: 'optit-lab-service', description: 'Docker image name')
-        string(name: 'DOCKER_REPO', defaultValue: 'bharathoptdocker', description: 'Docker repository')
-    }
+def gitCheckout(branch, url, credentialsId) {
+    checkout([
+        $class: 'GitSCM',
+        branches: [[name: "*/${branch}"]],
+        doGenerateSubmoduleConfigurations: false,
+        extensions: [],
+        userRemoteConfigs: [[url: url, credentialsId: credentialsId]]
+    ])
+}
 
-    stages {
-        stage('Git Checkout') {
-            steps {
-                script {
-                    def dsl = load 'dsl_script.groovy'
-                    dsl.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'git-PAT')
-                }
-            }
-        }
-        stage('Build with Gradle') {
-            steps {
-                script {
-                    def dsl = load 'dsl_script.groovy'
-                    dsl.buildWithGradle()
-                }
-            }
-        }
-        stage('Docker Build') {
-            steps {
-                script {
-                    def dsl = load 'dsl_script.groovy'
-                    dsl.dockerBuild(params.DOCKER_IMAGE_NAME)
-                }
-            }
-        }
-        stage('Docker Publish') {
-            steps {
-                script {
-                    def dsl = load 'dsl_script.groovy'
-                    dsl.dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
-                }
-            }
-        }
+def buildWithGradle() {
+    sh './gradlew build'
+}
+
+def dockerBuild(imageName) {
+    sh "docker build -t ${imageName} ."
+}
+
+def dockerPublish(imageName, repo, credentialsId) {
+    withCredentials([usernamePassword(credentialsId: credentialsId, passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+        sh "docker login -u $USERNAME -p $PASSWORD"
+        sh "docker tag ${imageName} ${repo}/${imageName}"
+        sh "docker push ${repo}/${imageName}"
     }
 }
