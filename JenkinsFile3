@@ -12,7 +12,7 @@ pipeline {
         stage('Git Checkout') {
             steps {
                 script {
-                    def gitCheckoutScript = load 'pipeline-scripts/gitCheckout.groovy'
+                    def gitCheckoutScript = load 'sharedlibraries/common/common-scm-util/gitCheckout.groovy'
                     gitCheckoutScript.gitCheckout(params.BRANCH_NAME, params.GIT_URL, 'bkgit')
                 }
             }
@@ -20,7 +20,7 @@ pipeline {
         stage('Build with Gradle') {
             steps {
                 script {
-                    def buildWithGradleScript = load 'pipeline-scripts/buildWithGradle.groovy'
+                    def buildWithGradleScript = load 'sharedlibraries/common/common-build-util/buildWithGradle.groovy'
                     buildWithGradleScript.buildWithGradle()
                 }
             }
@@ -28,7 +28,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    def dockerBuildScript = load 'pipeline-scripts/dockerBuild.groovy'
+                    def dockerBuildScript = load 'sharedlibraries/common/common-docker-util/dockerBuild.groovy'
                     dockerBuildScript.dockerBuild(params.DOCKER_IMAGE_NAME)
                 }
             }
@@ -36,7 +36,7 @@ pipeline {
         stage('Docker Publish') {
             steps {
                 script {
-                    def dockerPublishScript = load 'pipeline-scripts/dockerPublish.groovy'
+                    def dockerPublishScript = load 'sharedlibraries/common/common-docker-util/dockerPublish.groovy'
                     dockerPublishScript.dockerPublish(params.DOCKER_IMAGE_NAME, params.DOCKER_REPO, 'bkdockerid')
                 }
             }
