@@ -25,12 +25,10 @@ tasks.named('test') {
 }
 
 sonar {
-  // Configure SonarQube properties
   properties {
-    property "sonar.projectKey", "optit-lab-service"
+    property "sonar.projectKey", "optit-cloud-team_optit-lab-service"
     property "sonar.organization", "mysonarorganisation1"
     property "sonar.host.url", "https://sonarcloud.io"
-    property "sonar.java.binaries", "build/classes/java"
   }
 }
 
