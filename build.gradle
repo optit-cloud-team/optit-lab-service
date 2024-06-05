@@ -30,5 +30,7 @@ sonar {
     property "sonar.projectKey", "mysonarorganisation1_mysonarproject"
     property "sonar.organization", "mysonarorganisation1"
     property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.java.binaries", "build/classes"
   }
 }
+
