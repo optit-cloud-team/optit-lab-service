@@ -23,11 +23,6 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
-
-plugins {
-  id "org.sonarqube" version "4.4.1.3373"
-}
-
 sonar {
   properties {
     property "sonar.projectKey", "mysonarorganisation1_mysonarproject"
